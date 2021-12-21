@@ -65,7 +65,7 @@ if (!dir.exists("results_offset")){dir.create("results_offset")}
 
 # Generate the Stan code for our own reference
 stan_code <- make_stancode(modelForm, data = dataTable,chains = chains, family = 'student', prior = priorRBA)
-cat(stan_code, file = paste0("results_offset/", project, "_only_stancode.stan"), sep='\n')
+cat(stan_code, file = paste0("results_offset/model1/", project, "_only_stancode.stan"), sep='\n')
 
 # Following run the BML model
 # The number in threading() means the cores used for with-in chain parallelization,
@@ -82,7 +82,7 @@ fm <- brm(modelForm,
           threads = threading(12))
 
 # Save the results as a RData file
-save.image(file = paste0("results_offset/", project, ".RData"))
+save.image(file = paste0("results_offset/model1/", project, ".RData"))
 
 # Shows the summary of the model
 cat(capture.output(summary(fm)), sep = '\n', append = TRUE)
